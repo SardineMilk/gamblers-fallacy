@@ -1,5 +1,6 @@
 import requests
 import time
+import os
 
 def getUserData(user_id):
     try:
@@ -16,8 +17,16 @@ def getUserData(user_id):
 
 
 def saveUserData(user_id, data):
-    # TODO - create raw_users/ if folder does not exist
-    
+    try:
+        os.mkdir("gamblers-fallacy/raw_users") #prayers and hopes
+        print("Directory raw_users created.")
+    except FileExistsError:
+        print("Directory raw_users already exists.")
+    except PermissionError:
+        print("Permission to make dicrectory was denied.")
+    except:
+        print("error? error! error? error!") 
+
     try:
         with open(f"raw_users/{user_id}.txt", "w") as file:
             file.write(data)
